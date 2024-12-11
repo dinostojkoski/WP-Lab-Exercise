@@ -24,13 +24,12 @@
                     <p class="lead">Add an Artist to the List of Performers</p>
                     <form th:method="GET" th:action="@{/songDetails}">
                         <div th:each="artist : ${artistList}" class="form-check mb-3">
-                            <input class="form-check-input" type="radio" name="artistId"
-                                   th:id="'artist-' + ${artist.getId()}"
-                                   th:value="${artist.getId()}">
-                            <label class="form-check-label" th:for="'artist-' + ${artist.getId()}"
+                            <input type="radio" name="artistId" id="artistId"
+                                   th:value="${artist.getId()}" class="form-check-input">
+                            <label for="artistId" class="form-check-label" th:for="'artist-' + ${artist.getId()}"
                                    th:text="${artist.getFirstName()} + ' ' + ${artist.getLastName()}"></label>
                         </div>
-                        <input type="hidden" name="trackId" th:value="${trackId}">
+                        <input type="hidden" name="id" th:value="${id}">
                         <button type="submit" class="btn btn-primary">Add Artist</button>
                     </form>
                 </div>

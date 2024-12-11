@@ -20,14 +20,20 @@
             <div class="p-5 mb-4 bg-body-tertiary rounded-3">
                 <div class="container-fluid py-5">
                     <h1 class="display-6 fw-bold mb-4">Choose a song</h1>
-                    <form th:method="GET" th:action="@{/artist}">
+                    <form th:method="GET" th:action="@{/artists}">
                         <div th:each="song : ${songList}" class="form-check mb-3">
-                            <input id="trackId" type="radio" name="trackId" class="form-check-input" th:value="${song.getTrackId()}"
-                                   th:text="'Title: ' + ${song.getTitle()} + ', Genre: ' + ${song.getGenre()} + ', Release Year: ' + ${song.getReleaseYear()}">
-                            <label for="trackId" class="form-check-label"></label>
+                            <input id="id" type="radio" name="id" class="form-check-input" th:value="${song.getId()}"
+                                   th:text="'Title: ' + ${song.getTitle()} + ', Genre: ' + ${song.getGenre()} + ', Release Year: ' + ${song.getReleaseYear()} + ', Album: ' + ${song.album.getName()}">
+                            <label for="id" class="form-check-label"></label>
+
+                            <a th:href="@{/songs/delete/{songId}(songId=${song.getId()})}" class="btn btn-danger">Delete</a>
+                            <a th:href="@{/songs/edit/{songId}(songId=${song.getId()})}" class="btn btn-primary">Edit</a>
                         </div>
-                        <button type="submit" class="btn btn-primary">Add Artist</button>
+                        <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
+                    <a href="/songs/add-form" class="btn btn-block btn-dark mt-2">
+                        Add New Song
+                    </a>
                 </div>
             </div>
 

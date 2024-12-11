@@ -1,4 +1,4 @@
-package com.example.wp_lab.web;
+package com.example.wp_lab.web.servlet;
 
 import com.example.wp_lab.model.Artist;
 import com.example.wp_lab.model.Song;
@@ -16,7 +16,7 @@ import org.thymeleaf.web.servlet.JakartaServletWebApplication;
 
 import java.io.IOException;
 
-@WebServlet(name = "song-details-servlet", urlPatterns = "/songDetails")
+@WebServlet(name = "song-details-servlet", urlPatterns = "/servlet/songDetails")
 public class SongDetailsServlet extends HttpServlet {
 
     private final SongService songService;
@@ -31,10 +31,10 @@ public class SongDetailsServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String trackId = req.getParameter("trackId");
+        Long trackId = Long.parseLong(req.getParameter("trackId"));
         Long artistId = Long.parseLong(req.getParameter("artistId"));
 
-        Song song = songService.findByTrackId(trackId);
+        Song song = songService.findById(trackId);
         Artist artist = artistService.findById(artistId);
 
         if (song != null && artist != null) {
@@ -49,20 +49,4 @@ public class SongDetailsServlet extends HttpServlet {
         context.setVariable("song", song);
         templateEngine.process("songDetails.html", context, resp.getWriter());
     }
-
-    /*@Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Long trackId = Long.valueOf(req.getParameter("trackId"));
-        String artistId = req.getParameter("artistId");
-
-        Song song = Optional.of(songService.listSongs().stream().findFirst()).orElseThrow().orElse(null);
-
-        IWebExchange iWebExchange = JakartaServletWebApplication
-                .buildApplication(req.getServletContext())
-                .buildExchange(req, resp);
-
-        WebContext context = new WebContext(iWebExchange);
-        context.setVariable("song", song);
-        templateEngine.process("songDetails.html", context, resp.getWriter());
-    }*/
 }

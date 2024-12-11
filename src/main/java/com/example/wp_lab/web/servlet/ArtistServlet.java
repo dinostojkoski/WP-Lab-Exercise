@@ -1,7 +1,7 @@
-package com.example.wp_lab.web;
+package com.example.wp_lab.web.servlet;
 
-import com.example.wp_lab.model.Song;
-import com.example.wp_lab.service.SongService;
+import com.example.wp_lab.model.Artist;
+import com.example.wp_lab.service.ArtistService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -15,20 +15,23 @@ import org.thymeleaf.web.servlet.JakartaServletWebApplication;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "song-list-servlet", urlPatterns = "/listSongs")
-public class SongListServlet extends HttpServlet {
+@WebServlet(name = "artist-servlet", urlPatterns = "/servlet/artist")
+public class ArtistServlet extends HttpServlet {
 
-    private final SongService songService;
+    private final ArtistService artistService;
     private final SpringTemplateEngine springTemplateEngine;
 
-    public SongListServlet(SongService songService, SpringTemplateEngine springTemplateEngine) {
-        this.songService = songService;
+    public ArtistServlet(ArtistService artistService, SpringTemplateEngine springTemplateEngine) {
+        this.artistService = artistService;
         this.springTemplateEngine = springTemplateEngine;
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<Song> songList = songService.listSongs();
+        List<Artist> artistList = artistService.listArtists();
+        req.setAttribute("artistList", artistList);
+        String trackId = req.getParameter("trackId");
+        req.setAttribute("trackId", trackId);
 
         IWebExchange webExchange = JakartaServletWebApplication
                 .buildApplication(getServletContext())
@@ -36,7 +39,8 @@ public class SongListServlet extends HttpServlet {
 
         WebContext context = new WebContext(webExchange);
 
-        context.setVariable("songList", songList);
-        springTemplateEngine.process("listSongs.html", context, resp.getWriter());
+        context.setVariable("artistList", artistList);
+        context.setVariable("trackId", trackId);
+        springTemplateEngine.process("artistsList.html", context, resp.getWriter());
     }
 }
