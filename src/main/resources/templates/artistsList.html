@@ -30,8 +30,11 @@
                                    th:text="${artist.getFirstName()} + ' ' + ${artist.getLastName()}"></label>
                         </div>
                         <input type="hidden" name="id" th:value="${id}">
-                        <button type="submit" class="btn btn-primary">Add Artist</button>
+                        <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
+                    <a href="/artists/add-form" class="btn btn-block btn-dark mt-2">
+                        Add New Artist
+                    </a>
                 </div>
             </div>
 

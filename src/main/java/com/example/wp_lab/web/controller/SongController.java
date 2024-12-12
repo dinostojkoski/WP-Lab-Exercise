@@ -24,14 +24,17 @@ public class SongController {
 
     // Get Song Page
     @GetMapping
-    public String getSongsPage(@RequestParam(required = false) String error, Model model) {
-        if (error != null && !error.isEmpty()) {
-            model.addAttribute("hasError", true);
-            model.addAttribute("error", error);
-        }
-
+    public String getSongsPage(@RequestParam(required = false) Long albumId, Model model) {
         List<Song> songList = songService.listSongs();
         List<Album> albumList = albumService.findAll();
+
+        if (albumId != null) {
+            // If an albumId is provided, search for songs in that album
+            songList = songService.findAllByAlbum_Id(albumId);
+        } else {
+            // Otherwise, display all songs
+            songList = songService.listSongs();
+        }
 
         model.addAttribute("songList", songList);
         model.addAttribute("albumList", albumList);

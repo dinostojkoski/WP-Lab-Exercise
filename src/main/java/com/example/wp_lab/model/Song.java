@@ -1,22 +1,30 @@
 package com.example.wp_lab.model;
 
+import jakarta.persistence.*;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Data
+@Entity
+@NoArgsConstructor
 public class Song {
-    private static Long idCounter = 0L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String title;
     private String genre;
     private int releaseYear;
+
+    @OneToMany
     List<Artist> performers;
+
+    @ManyToOne
     private Album album;
 
     public Song(String title, String genre, int releaseYear, Album album) {
-        this.id = idCounter++;
         this.title = title;
         this.genre = genre;
         this.releaseYear = releaseYear;

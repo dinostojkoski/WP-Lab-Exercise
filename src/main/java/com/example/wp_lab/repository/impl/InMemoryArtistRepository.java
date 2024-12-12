@@ -1,4 +1,4 @@
-package com.example.wp_lab.repository;
+package com.example.wp_lab.repository.impl;
 
 import com.example.wp_lab.bootstrap.DataHolder;
 import com.example.wp_lab.model.Artist;
@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public class ArtistRepository {
+public class InMemoryArtistRepository {
     public List<Artist> findAll() {
         return DataHolder.artistList;
     }

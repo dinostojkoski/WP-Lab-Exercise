@@ -17,11 +17,11 @@ public class DataHolder {
 
     @PostConstruct
     public void init() {
-        artistList.add(new Artist(1L, "Freddie", "Mercury", "Lead vocalist of Queen, one of the greatest rock performers."));
-        artistList.add(new Artist(2L, "Michael", "Jackson", "The King of Pop, known for his iconic dance moves and vocals."));
-        artistList.add(new Artist(3L, "Stevie", "Wonder", "A legendary singer-songwriter and multi-instrumentalist."));
-        artistList.add(new Artist(4L, "Eric", "Clapton", "One of the most successful and influential guitarists in rock music."));
-        artistList.add(new Artist(5L, "Elton", "John", "A world-famous pianist and composer of classic pop and rock hits."));
+        artistList.add(new Artist("Freddie", "Mercury", "Lead vocalist of Queen, one of the greatest rock performers."));
+        artistList.add(new Artist("Michael", "Jackson", "The King of Pop, known for his iconic dance moves and vocals."));
+        artistList.add(new Artist("Stevie", "Wonder", "A legendary singer-songwriter and multi-instrumentalist."));
+        artistList.add(new Artist("Eric", "Clapton", "One of the most successful and influential guitarists in rock music."));
+        artistList.add(new Artist("Elton", "John", "A world-famous pianist and composer of classic pop and rock hits."));
 
         albumList.add(new Album("A Night at the Opera", "Rock", "1975"));
         albumList.add(new Album("Thriller", "Pop", "1982"));

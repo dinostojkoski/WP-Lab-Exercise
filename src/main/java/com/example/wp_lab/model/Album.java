@@ -1,21 +1,28 @@
 package com.example.wp_lab.model;
 
+import jakarta.persistence.*;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Data
+@Entity
+@NoArgsConstructor
 public class Album {
-    private static Long idCounter = 0L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String name;
     private String genre;
     private String releaseYear;
+
+    @OneToMany(mappedBy = "album")
     private List<Song> songs;
 
     public Album(String name, String genre, String releaseYear) {
-        this.id = ++idCounter;
         this.name = name;
         this.genre = genre;
         this.releaseYear = releaseYear;
@@ -25,10 +32,6 @@ public class Album {
     // Add a song to this album
     public void addSong(Song song) {
         this.songs.add(song);
-    }
-
-    public static void setIdCounter(Long idCounter) {
-        Album.idCounter = idCounter;
     }
 
     public Long getId() {

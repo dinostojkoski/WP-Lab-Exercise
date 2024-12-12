@@ -37,6 +37,26 @@
                 </div>
             </div>
 
+            <div class="container">
+                <div class="row">
+                    <div class="col-4">
+                        <form method="get" action="/songs" class="">
+                            <label for="album" class="form-label">Choose an album:</label>
+                            <select name="albumId" id="album" class="form-control mb-2">
+                                <option value="" class="lead">All Albums</option>
+                                <!-- Loop through the albums and create an option for each one -->
+                                <th:block th:each="album : ${albumList}">
+                                    <option th:value="${album.getId()}" th:text="${album.getName()}"></option>
+                                </th:block>
+                            </select>
+                            <button type="submit" class="btn btn-primary">Search</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+
+
             <footer class="pt-3 mt-4 text-body-secondary border-top">
                Web Programming &copy; 2024
             </footer>

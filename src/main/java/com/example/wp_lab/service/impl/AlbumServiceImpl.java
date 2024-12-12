@@ -1,7 +1,8 @@
 package com.example.wp_lab.service.impl;
 
 import com.example.wp_lab.model.Album;
-import com.example.wp_lab.repository.AlbumRepository;
+import com.example.wp_lab.repository.impl.InMemoryAlbumRepository;
+import com.example.wp_lab.repository.jpa.AlbumRepository;
 import com.example.wp_lab.service.AlbumService;
 import org.springframework.stereotype.Service;
 
