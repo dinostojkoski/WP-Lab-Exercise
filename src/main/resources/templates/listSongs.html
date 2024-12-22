@@ -15,6 +15,12 @@
                 <a href="/" class="d-flex align-items-center text-body-emphasis text-decoration-none">
                     <span class="fs-4">My Music Store</span>
                 </a>
+                <a href="/login" class="nav-link text-primary">
+                    Login
+                </a>
+                <a href="/logout" class="nav-link text-danger">
+                    Logout
+                </a>
             </header>
 
             <div class="p-5 mb-4 bg-body-tertiary rounded-3">
@@ -26,14 +32,20 @@
                                    th:text="'Title: ' + ${song.getTitle()} + ', Genre: ' + ${song.getGenre()} + ', Release Year: ' + ${song.getReleaseYear()} + ', Album: ' + ${song.album.getName()}">
                             <label for="id" class="form-check-label"></label>
 
-                            <a th:href="@{/songs/delete/{songId}(songId=${song.getId()})}" class="btn btn-danger">Delete</a>
-                            <a th:href="@{/songs/edit/{songId}(songId=${song.getId()})}" class="btn btn-primary">Edit</a>
+                            <th:block sec:authorize="hasRole('ROLE_ADMIN')">
+                                <a th:href="@{/songs/delete/{songId}(songId=${song.getId()})}" class="btn btn-danger">Delete</a>
+                            </th:block>
+                            <th:block sec:authorize="hasRole('ROLE_ADMIN')">
+                                <a th:href="@{/songs/edit/{songId}(songId=${song.getId()})}" class="btn btn-primary">Edit</a>
+                            </th:block>
                         </div>
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
-                    <a href="/songs/add-form" class="btn btn-block btn-dark mt-2">
-                        Add New Song
-                    </a>
+                    <th:block sec:authorize="hasRole('ROLE_ADMIN')">
+                        <a href="/songs/add-form" class="btn btn-block btn-dark mt-2">
+                            Add New Song
+                        </a>
+                    </th:block>
                 </div>
             </div>
 
